@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('forgot_password_schemas', function (Blueprint $table) {
             $table->id();
+            $table->text("token")->index("forgot_password_token_index", "hash");
+            $table
+                ->uuid("admin_id")
+                ->references("id")->on('administrators')
+                ->deferrable("deferred")
+                ->index("forgot_password_admin_id_index", "hash");
+
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('user_verify_attachment_schemas', function (Blueprint $table) {
             $table->id();
             $table->uuid("user_id")->nullable();
-            $table->foreign("user_id")->references("id")->on('user_schemas')->deferrable("deferred");
+            $table->foreign("user_id")->references("id")->on('users')->deferrable("deferred");
             $table->unsignedBigInteger("attachment_id")->nullable();
             $table
                 ->foreign("attachment_id")

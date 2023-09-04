@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('shared_post_schemas', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+
+            $table
+                ->unsignedBigInteger("shared_post");
+            $table->foreign("shared_post")->references("id")->on('post_schemas')->deferrable("deferred");
         });
     }
 

@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('chat_schemas', function (Blueprint $table) {
             $table->id();
+            $table->string("name");
+            $table->boolean("is_accepted")->defaultTo(true);
+            $table->timestamp("last_messaged_at");
+            $table->json("recipients")->nullable();
+
             $table->timestamps();
         });
     }

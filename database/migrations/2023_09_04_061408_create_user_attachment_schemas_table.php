@@ -12,8 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_attachment_schemas', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('profile_picture');
+            $table
+                ->foreign("profile_picture")
+                ->references("id")->on('attachment_schemas')
+                ->deferrable("deferred");
+            $table->unsignedBigInteger('cover_photo');
+
+            $table
+                ->foreign("cover_photo")
+                ->references("id")->on('attachment_schemas')
+                ->deferrable("deferred");
         });
     }
 

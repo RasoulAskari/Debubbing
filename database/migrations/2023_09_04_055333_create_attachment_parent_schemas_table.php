@@ -12,8 +12,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('attachment_parent_schemas', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table
+                ->unsignedBigInteger("parent_id")
+
+                ->nullable();
+            $table
+                ->foreign("parent_id")
+                ->references("id")->on('attachment_schemas');
+
+
+            $table
+                ->unsignedBigInteger("thumbnail_id")
+                ->nullable();
+            $table
+                ->foreign("thumbnail_id")
+                ->references("id")->on('attachment_schemas');
         });
     }
 

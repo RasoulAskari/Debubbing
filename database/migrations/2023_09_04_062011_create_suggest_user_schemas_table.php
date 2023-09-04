@@ -20,7 +20,7 @@ return new class extends Migration
                 ->index("suggest_user_id_index", "hash");
             $table
                 ->uuid("created_by")
-                ->references("id")->on('administrator_schemas')
+                ->references("id")->on('admins')
                 ->deferrable("deferred")
                 ->index("suggest_created_by_index", "hash");
         });

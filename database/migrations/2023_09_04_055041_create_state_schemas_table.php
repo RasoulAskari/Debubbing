@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string("type")->nullable();
             $table
                 ->unsignedBigInteger("country_id");
-            $table->foreign("country_id")->references("id")->on('countries_schemas')->deferrable("deferred");
+            $table->foreign("country_id")->references("id")->on('country_schemas')->deferrable("deferred");
         });
     }
 

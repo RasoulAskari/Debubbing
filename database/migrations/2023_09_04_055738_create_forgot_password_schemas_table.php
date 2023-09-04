@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text("token")->index("forgot_password_token_index", "hash");
             $table
                 ->uuid("admin_id")
-                ->references("id")->on('administrators')
+                ->references("id")->on('admins')
                 ->deferrable("deferred")
                 ->index("forgot_password_admin_id_index", "hash");
 

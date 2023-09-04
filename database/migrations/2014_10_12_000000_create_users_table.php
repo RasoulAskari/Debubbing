@@ -51,7 +51,7 @@ return new class extends Migration
             $table->boolean("verified")->default(false);
             $table
                 ->uuid("verified_by")
-                ->references("administrators->id")
+                ->references("id")->on('admins')
                 ->deferrable("deferred")
                 ->index("user_verified_by_index", "hash");
             $table->timestamp("last_online")->nullable();

@@ -27,7 +27,7 @@ return new class extends Migration
             $table->foreign("post_id")->references("id")->on('post_schemas')->deferrable("deferred");
             $table
                 ->uuid("created_by")
-                ->references("id")->on('administrator_schemas')
+                ->references("id")->on('admins')
                 ->deferrable("deferred")
                 ->nullable()
                 ->onDelete("SET NULL");

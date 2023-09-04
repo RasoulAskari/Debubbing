@@ -26,7 +26,7 @@ class AdminController extends Controller
         }
     }
 
-    public function showUser()
+    public function showUsers()
     {
         return User::latest()->get();
     }

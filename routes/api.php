@@ -17,11 +17,7 @@ use App\Models\Authenticate;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-
+Route::middleware('auth:sanctum')->get('/user', [AdminController::class, 'showUsers']);
 
 Route::post('login', [AuthenticateController::class, 'login']);
 Route::post('admin/login', [AdminController::class, 'login']);

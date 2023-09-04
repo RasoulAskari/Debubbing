@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('user_account_prefrences', function (Blueprint $table) {
             $table->id();
+            $table
+                ->uuid("user_id")
+                ->references("id")->on('user_schemas')
+                ->deferrable("deferred")
+                ->index("user_account_prefrences_user_id_index", "hash");
+            $table->string("key")->index("user_account_prefrences_key_index", "hash");
+            $table->string("value")->index("user_account_prefrences_value_index", "hash");
+
             $table->timestamps();
         });
     }

@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('post_hash_tag_schemas', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+
+            $table->string("title")->index("hashtag_title_index", "hash");
+            $table->timestamps(true, true);
         });
     }
 

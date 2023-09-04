@@ -13,6 +13,28 @@ return new class extends Migration
     {
         Schema::create('ad_schemas', function (Blueprint $table) {
             $table->id();
+            $table->string("post_link");
+            $table->integer("audience_count");
+            $table->integer("views_count");
+            $table->timestamp("expire_at");
+            $table
+                ->enum("status", ["active", "disabled", "expired"])
+                ->index("ads_status_index", "hash")
+                ->nullable();
+            $table
+                ->unsignedBigInteger("post_id")
+                ->nullable();
+            $table->foreign("post_id")->references("id")->on('post_schemas')->deferrable("deferred");
+            $table
+                ->uuid("created_by")
+                ->references("id")->on('administrator_schemas')
+                ->deferrable("deferred")
+                ->nullable()
+                ->onDelete("SET NULL");
+
+            $table->string("expire_job_id");
+
+
             $table->timestamps();
         });
     }

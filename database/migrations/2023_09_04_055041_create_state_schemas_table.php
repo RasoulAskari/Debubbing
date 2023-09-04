@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('state_schemas', function (Blueprint $table) {
             $table->id();
-
             $table->string("name");
             $table->string("state_code");
             $table->string("latitude");

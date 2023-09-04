@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('user_login_code_schemas', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string("phone")->index("login_code_phone_index", "hash");
+            $table->string("code")->index("login_code_code_index", "hash");
         });
     }
 

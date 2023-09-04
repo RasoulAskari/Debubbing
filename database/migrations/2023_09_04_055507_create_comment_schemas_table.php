@@ -13,6 +13,23 @@ return new class extends Migration
     {
         Schema::create('comment_schemas', function (Blueprint $table) {
             $table->id();
+            $table
+                ->unsignedBigInteger("post_id")
+                ->nullable();
+            $table
+                ->foreign("post_id")
+                ->references("id")->on('post_schemas')
+                ->deferrable("deferred")
+                ->onDelete("SET NULL");
+            $table
+                ->uuid("user_id")
+                ->index("comment_user_id_index", "hash")
+                ->references("id")->on('user_schemas')
+                ->deferrable("deferred")
+                ->nullable()
+                ->onDelete("SET NULL");
+            $table->text("content")->index("comment_content_index", "btree");
+
             $table->timestamps();
         });
     }

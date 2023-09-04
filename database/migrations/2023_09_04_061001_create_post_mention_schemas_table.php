@@ -13,7 +13,19 @@ return new class extends Migration
     {
         Schema::create('post_mention_schemas', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+
+            $table
+                ->unsignedBigInteger("post_id")
+                ->unsigned()
+                ->nullable()
+                ->index("post_mention_post_id_index", "hash");
+            $table->foreign("post_id")->references("id")->on('post_schemas')->deferrable("deferred");
+            $table
+                ->uuid("user_id")
+                ->references("id")->on('user_schemas')
+                ->deferrable("deferred")
+                ->index("post_mention_user_id_index", "hash");
+            $table->timestamps(true, true);
         });
     }
 

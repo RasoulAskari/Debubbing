@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('notification_schemas', function (Blueprint $table) {
             $table->id();
+            $table->string("title")->nullable();
+            $table->string("body")->nullable();
+            $table->json("data")->nullable();
+            $table->boolean("seen")->default(false);
+            $table->string("message_id")->nullable();
+            $table
+                ->uuid("user_id")
+                ->references("id")->on('user_schemas')
+                ->deferrable("deferred")
+                ->index("notifications_user_id_index", "hash");
+
+
             $table->timestamps();
         });
     }

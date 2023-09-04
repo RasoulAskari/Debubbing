@@ -13,7 +13,16 @@ return new class extends Migration
     {
         Schema::create('blcoked_user_schemas', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table
+                ->uuid("user_id")
+                ->references("id")->on('user_schemas')
+                ->deferrable("deferred")
+                ->index("user_block_user_id_index", "hash");
+            $table
+                ->uuid("blocked_user_id")
+                ->references("id")->on('user_schemas')
+                ->deferrable("deferred")
+                ->index("user_block_blocked_id_index", "hash");
         });
     }
 

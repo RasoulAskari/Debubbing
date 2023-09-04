@@ -13,7 +13,17 @@ return new class extends Migration
     {
         Schema::create('message_request_schemas', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table
+                ->uuid("receiver_id")
+                ->references("id")->on('user_schemas')
+                ->deferrable("deferred")
+                ->index("message_request_receiver_id_index", "hash");
+            $table
+                ->uuid("sender_id")
+                ->references("id")->on('user_schemas')
+                ->deferrable("deferred")
+                ->index("message_request_sender_id_index", "hash");
+            $table->integer("chat_id")->references("chats->id")->deferrable("deferred");
         });
     }
 

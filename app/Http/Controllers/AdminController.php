@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
+use App\Models\User;
 
 
 class AdminController extends Controller
@@ -23,16 +24,9 @@ class AdminController extends Controller
                 'token_type' => 'Bearer',
             ]);
         }
+    }
 
-
-        // Check User Credentials For Login
-        //     if (Auth::attempt($request->only(['email', 'password']))) {
-        //         // create token for logged user
-        //         $token = Auth::admin()->createToken($request->input('email'))->plainTextToken;
-
-        //         return response()->json(['result' => true, "user" => Auth::admin(), "token" => $token], 200);
-        //     }
-        //     return response()->json(["result" => false, "error" => "پسورد یا ایمل نادرست میباشد!"], 401);
-        // }
+    public function showUser()
+    {
     }
 }

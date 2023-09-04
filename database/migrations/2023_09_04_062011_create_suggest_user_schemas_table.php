@@ -13,7 +13,16 @@ return new class extends Migration
     {
         Schema::create('suggest_user_schemas', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table
+                ->uuid("user_id")
+                ->references("id")->on('user_schemas')
+                ->deferrable("deferred")
+                ->index("suggest_user_id_index", "hash");
+            $table
+                ->uuid("created_by")
+                ->references("id")->on('administrator_schemas')
+                ->deferrable("deferred")
+                ->index("suggest_created_by_index", "hash");
         });
     }
 

@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('search_history_schemas', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table
+                ->uuid("user_id")
+                ->references("id")->on('user_schemas')
+                ->deferrable("deferred")
+                ->index("user_search_history_user_id_index", "hash");
+            $table->string("search_text")->index("user_search_text_index", "btree");
         });
     }
 

@@ -13,6 +13,26 @@ return new class extends Migration
     {
         Schema::create('country_schemas', function (Blueprint $table) {
             $table->id();
+            $table->string("name");
+            $table->string("iso3")->index("country_iso2_index", "hash");
+            $table->string("iso2")->index("country_iso3_index", "hash");
+            $table->string("numeric_code");
+            $table->string("phone_code");
+            $table->string("capital");
+            $table->string("currency");
+            $table->string("currency_name");
+            $table->string("currency_symbol");
+            $table->string("tld");
+            $table->string("native");
+            $table->string("region");
+            $table->string("subregion");
+            $table->json("timezones");
+            $table->json("translations");
+            $table->string("latitude");
+            $table->string("longitude");
+            $table->string("emoji");
+            $table->string("emojiU");
+            $table->string("nationality");
             $table->timestamps();
         });
     }

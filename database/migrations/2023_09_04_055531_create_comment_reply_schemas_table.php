@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('comment_reply_schemas', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger("comment_id")->nullable();
+            $table->foreign("comment_id")->references("id")->on('comment_schemas')->deferrable("deferred");
         });
     }
 

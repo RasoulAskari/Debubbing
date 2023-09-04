@@ -13,7 +13,16 @@ return new class extends Migration
     {
         Schema::create('follow_request_schemas', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table
+                ->uuid("receiver_id")
+                ->references("id")->on('user_schemas')
+                ->deferrable("deferred")
+                ->index("follow_request_receiver_index", "hash");
+            $table
+                ->uuid("sender_id")
+                ->references("id")->on('user_schemas')
+                ->deferrable("deferred")
+                ->index("follow_request_sender_index", "hash");
         });
     }
 

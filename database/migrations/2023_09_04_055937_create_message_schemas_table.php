@@ -13,6 +13,27 @@ return new class extends Migration
     {
         Schema::create('message_schemas', function (Blueprint $table) {
             $table->id();
+            $table->text("message")->index("message_message_index", "btree");
+            $table
+                ->uuid("sender_id")
+                ->references("id")->on('user_schemas')
+                ->deferrable("deferred")
+                ->index("message_sender_id_index", "hash");
+            $table
+                ->unsignedBigInteger("chat_id");
+            $table->foreign("chat_id")->references("id")->on('chat_schemas')->deferrable("deferred");
+            $table
+                ->enum("attachment_type", ["none", "voice", "image_video"])
+                ->default("none");
+            $table
+                ->integer("reply_to")
+                ->unsigned()
+                ->nullable()
+                ->index("message_reply_index", "hash");
+            $table->json("recipients")->nullable();
+
+            $table->boolean("seen")->default(false);
+
             $table->timestamps();
         });
     }

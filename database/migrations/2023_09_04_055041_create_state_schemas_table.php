@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('state_schemas', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+
+            $table->string("name");
+            $table->string("state_code");
+            $table->string("latitude");
+            $table->string("longitude");
+            $table->string("type")->nullable();
+            $table
+                ->unsignedBigInteger("country_id");
+            $table->foreign("country_id")->references("id")->on('countries_schemas')->deferrable("deferred");
         });
     }
 

@@ -12,7 +12,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('message_attachment_parent_schemas', function (Blueprint $table) {
-            $table->id();
+            $table
+                ->unsignedBigInteger("parent_id")
+                ->nullable();
+            $table
+                ->foreign("parent_id")
+                ->references("id")->on('message_attachment_schemas')
+                ->deferrable("deferred");
+            $table
+                ->unsignedBigInteger("thumbnail_id")
+                ->nullable();
+            $table
+                ->foreign("thumbnail_id")
+                ->references("id")->on('attachment_schemas')
+                ->deferrable("deferred");
+
             $table->timestamps();
         });
     }

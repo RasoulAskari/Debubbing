@@ -26,7 +26,7 @@ class AdminAuthMiddleware
                 return $next($request);
             } else {
                 return response()->json([
-                    'message' => 'failed'
+                    'message' => $token
                 ]);
             }
         } catch (Exception $e) {

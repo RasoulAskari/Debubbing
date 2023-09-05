@@ -29,7 +29,7 @@ class AdminController extends Controller
     public function showUsers(Request $request)
     {
         $user =  User::latest()->get();
-        response()->json([
+        return response()->json([
             'user' => $user,
             'request' => $request
         ]);

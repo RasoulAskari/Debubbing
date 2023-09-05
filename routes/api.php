@@ -17,7 +17,7 @@ use App\Models\Authenticate;
 |
 */
 
-Route::middleware('auth.admin')->get('/user', [AdminController::class, 'showUsers']);
+Route::get('/user', [AdminController::class, 'showUsers'])->middleware('auth.admin');
 
 Route::post('login', [AuthenticateController::class, 'login']);
 Route::post('admin/login', [AdminController::class, 'login']);

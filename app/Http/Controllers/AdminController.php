@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
-use App\Models\User;
-
+use Laravel\Sanctum\PersonalAccessToken;
 
 class AdminController extends Controller
 {
@@ -28,10 +27,10 @@ class AdminController extends Controller
 
     public function showUsers(Request $request)
     {
-        $user =  User::latest()->get();
+        $token = \Laravel\Sanctum\PersonalAccessToken::findToken($request->token);
         return response()->json([
-            'user' => $user,
-            'request' => $request->token
+            'access_token' => $token,
+            'token_type' => 'Bearer',
         ]);
     }
 }

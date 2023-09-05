@@ -10,7 +10,7 @@ class AuthenticateController extends Controller
     public function login(Request  $request)
     {
         // Check User Credentials For Login
-        if (Auth::attempt($request->only(['email', 'password']))) {
+        if (Auth::attempt($request->only(['phone_no', 'password']))) {
             // create token for logged user
             $token = Auth::user()->createToken($request->input('email'))->plainTextToken;
 

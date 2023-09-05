@@ -18,10 +18,10 @@ class AdminFactory extends Factory
     public function definition(): array
     {
         return [
-            'full_name' => fake()->name(),
+            'id' => fake()->uuid(),
+            'full_name'  => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'phone_no' => fake()->phoneNumber(),
-            'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'birth_date' => fake()->dateTime(),
             'gender' => fake()->randomElement(['male', 'female']),

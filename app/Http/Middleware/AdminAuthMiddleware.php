@@ -18,13 +18,14 @@ class AdminAuthMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::guard('admins')->attempt($request->only(['email', 'password']))) {
+        $user = Auth::guard('admins')->check();
+        if ($user) {
+            return $next($request);
+        } else {
             return response()->json([
                 'message' => 'unAuthenticated',
                 'error' => 'Incorrect user email or password',
             ]);
-        } else {
-            return $next($request);
         }
     }
 }

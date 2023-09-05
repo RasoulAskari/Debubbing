@@ -6,7 +6,9 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\ApiToken;
+use Exception;
 
+use function PHPUnit\Framework\returnSelf;
 
 class AdminAuthMiddleware
 {
@@ -17,6 +19,20 @@ class AdminAuthMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        
+        try {
+            $token = \Laravel\Sanctum\PersonalAccessToken::findToken($request->token);
+
+            if ($token->tokenable_type == "App\\Models\\Admin") {
+                
+            } else {
+                return response()->json([
+                    'message' => 'failed'
+                ]);
+            }
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'catch'
+            ]);
+        }
     }
 }

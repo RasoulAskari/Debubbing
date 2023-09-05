@@ -18,27 +18,13 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('user', [AdminController::class, 'showUsers']);
+Route::middleware('auth.admin')->middleware('auth:sanctum')->group(function () {
+    return Route::get('user', [AdminController::class, 'showUsers']);
 });
 
 
 
 Route::middleware('auth:sanctum')->get('/user/email', function () {
-    // Retrieve the authenticated user using the 'sanctum' guard
-    $user = Auth::guard('sanctum')->user();
-
-    $token = PersonalAccessToken::where('token', hash('sha256', $tokenValue))->first();
-
-
-    // Check if the user is authenticated
-    if ($user) {
-        // Get the user's email
-
-        return response()->json(['email' => $user]);
-    }
-
-    return response()->json(['message' => 'User not authenticated'], 401);
 });
 
 

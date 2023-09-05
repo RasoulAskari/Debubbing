@@ -17,7 +17,6 @@ class AdminAuthMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $token = \Laravel\Sanctum\PersonalAccessToken::findToken($request->token);
         
     }
 }

@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::middleware('auth.admin')->middleware('auth:sanctum')->group(function () {
+Route::middleware('auth.admin')->group(function () {
     return Route::get('user', [AdminController::class, 'showUsers']);
 });
 

@@ -23,7 +23,7 @@ class AdminAuthMiddleware
             $token = \Laravel\Sanctum\PersonalAccessToken::findToken($request->token);
 
             if ($token->tokenable_type == "App\\Models\\Admin") {
-                
+                return $next($request);
             } else {
                 return response()->json([
                     'message' => 'failed'

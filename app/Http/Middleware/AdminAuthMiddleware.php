@@ -20,18 +20,11 @@ class AdminAuthMiddleware
     {
         if (!Auth::guard('admins')->attempt($request->only(['email', 'password']))) {
             return response()->json([
-                'message' => 'failed',
-                'token_type' => 'Bearer',
+                'message' => 'unAuthenticated',
+                'error' => 'Incorrect user email or password',
             ]);
         } else {
-            $user = Admin::where('email', $request['email'])->firstOrFail();
-
-            $token = $user->createToken('authToken')->plainTextToken;
-
-            return response()->json([
-                'access_token' => $token,
-                'token_type' => 'Bearer',
-            ]);
+            return $next($request);
         }
     }
 }

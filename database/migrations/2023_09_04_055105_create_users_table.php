@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string("username")->index("user_username_index", "btree");
             $table->string("phone_no")->index("user_phone_no_index", "btree");
             $table->text("bio")->nullable();
-            $table->string("email")->unique();
             $table->string("password")->nullable();
             $table->timestamp("birth_date")->nullable();
             $table->enum("gender", ["male", "female"]);

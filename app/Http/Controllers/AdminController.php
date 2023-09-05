@@ -14,16 +14,10 @@ class AdminController extends Controller
     public function login(Request  $request)
     {
 
-        if (Auth::guard('admins')->attempt($request->only(['email', 'password']))) {
-            $user = Admin::where('email', $request['email'])->firstOrFail();
-
-            $token = $user->createToken('authToken')->plainTextToken;
-
-            return response()->json([
-                'access_token' => $token,
-                'token_type' => 'Bearer',
-            ]);
-        }
+        return response()->json([
+            'access_token' => 'Do you know you are my love!',
+            'token_type' => 'Bearer',
+        ]);
     }
 
     public function showUsers()

@@ -23,7 +23,6 @@ class UserFactory extends Factory
             'full_name' => fake()->name(),
             'username' => fake()->userName(),
             'phone_no' => fake()->phoneNumber(),
-            'email' => fake()->email(),
             'gender' => fake()->randomElement(['male', 'female']),
             'status' => fake()->randomElement(['active', 'suspended']),
             'profile_type' => fake()->randomElement(['public', 'private']),
